@@ -42,7 +42,11 @@ export function MarketsPanel() {
         </div>
       }
     >
-      <div className="panel-stack">
+      <div
+        className={clsx("panel-stack", {
+          "panel-stack--flush": tab === "stocks" || tab === "crypto"
+        })}
+      >
         {tab === "stocks" ? (
           <TradingViewStockHeatmap />
         ) : tab === "crypto" ? (
