@@ -1,6 +1,8 @@
 # Situation Tracker
 
-Situation Tracker is a browser-first geopolitical monitoring dashboard built with Next.js.
+Dashboard to monitor the current geopolitical situation in the middle east.
+
+![IMG_5167](https://github.com/user-attachments/assets/69736552-0ccb-4d4d-8a76-fc08cf68302b)
 
 It combines:
 - a live news feed
@@ -8,43 +10,6 @@ It combines:
 - embedded live news video
 - market widgets
 - a curated resources panel
-
-## Run Locally
-
-Install dependencies:
-
-```bash
-npm install
-```
-
-Start the development server:
-
-```bash
-npm run dev
-```
-
-Build for production:
-
-```bash
-npm run build
-```
-
-## Current Features
-
-- Fixed multi-panel dashboard layout
-- Light and dark mode
-- Live headline feed with severity filters
-- Map hotspots based on recent news mentions
-- External flight tracking fallback
-- TradingView market embeds
-- Important resources links for travel, aviation, and crisis monitoring
-
-## Tech Stack
-
-- Next.js
-- React
-- TypeScript
-- Leaflet
 
 ## Notes
 
