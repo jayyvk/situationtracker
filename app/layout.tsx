@@ -5,8 +5,8 @@ import "leaflet/dist/leaflet.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "SitRep",
-  description: "Browser-first geopolitical monitoring dashboard"
+  title: "Situation Tracker",
+  description: "Dashboard to monitor the Middle East situation with live news feed, market impact and key resources"
 };
 
 export default function RootLayout({
