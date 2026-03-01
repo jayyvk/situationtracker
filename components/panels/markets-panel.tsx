@@ -10,7 +10,7 @@ import { TradingViewStockHeatmap } from "@/components/panels/tradingview-stock-h
 type MarketTab = "stocks" | "crypto" | "commodities";
 
 export function MarketsPanel() {
-  const [tab, setTab] = useState<MarketTab>("commodities");
+  const [tab, setTab] = useState<MarketTab>("stocks");
 
   return (
     <PanelShell

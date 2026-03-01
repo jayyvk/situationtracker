@@ -51,7 +51,7 @@ export const videoSources: VideoSource[] = [
   },
   {
     id: "bloomberg-live",
-    label: "Bloomberg TV",
+    label: "Bloomberg News",
     embedUrl: "https://www.youtube.com/embed/iEpJwprxDdk",
     watchUrl: "https://www.youtube.com/watch?v=iEpJwprxDdk",
     region: "north-america",

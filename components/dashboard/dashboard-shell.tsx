@@ -18,6 +18,24 @@ export function DashboardShell() {
         </div>
         <div className="top-bar__controls">
           <LiveRail />
+          <a
+            aria-label="Open X profile"
+            className="header-link"
+            href="https://x.com/jaynotai"
+            rel="noreferrer"
+            target="_blank"
+          >
+            X
+          </a>
+          <a
+            aria-label="Open GitHub project"
+            className="header-link header-link--wide"
+            href="https://github.com/jayyvk/situationtracker"
+            rel="noreferrer"
+            target="_blank"
+          >
+            GitHub
+          </a>
           <ThemeToggle />
         </div>
       </header>

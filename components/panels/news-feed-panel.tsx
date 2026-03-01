@@ -118,7 +118,7 @@ export function NewsFeedPanel() {
               void resource.refresh();
             }}
           >
-            ↻
+            <span className="panel-utility__icon">↻</span>
           </button>
         </div>
       }

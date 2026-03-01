@@ -9,7 +9,8 @@ type VideoConfigResponse = {
   items: VideoSource[];
 };
 
-const pinnedStorageKey = "sitrep-video-pinned";
+const pinnedStorageKey = "sitrep-video-pinned-v2";
+const defaultPinnedIds = ["aljazeera-live", "bloomberg-live"] as const;
 
 const regionLabels: Record<VideoSource["region"], string> = {
   "north-america": "North America",
@@ -50,8 +51,11 @@ export function VideoPanel() {
         const validPinned = parsedPinned.filter((id) =>
           payload.items.some((item) => item.id === id)
         );
+        const fallbackPinned = defaultPinnedIds.filter((id) =>
+          payload.items.some((item) => item.id === id)
+        );
         const defaultPinned =
-          validPinned.length > 0 ? validPinned : payload.items.slice(0, 4).map((item) => item.id);
+          validPinned.length > 0 ? validPinned : fallbackPinned;
 
         setPinnedIds(defaultPinned);
         setActiveId(defaultPinned[0] ?? payload.items[0]?.id ?? "");
@@ -140,7 +144,7 @@ export function VideoPanel() {
             type="button"
             onClick={() => setModalOpen(true)}
           >
-            ⚙
+            <span className="panel-utility__icon">⚙</span>
           </button>
         </div>
       }
