@@ -47,6 +47,9 @@ export function DashboardShell() {
           <ThemeToggle />
         </div>
       </header>
+      <div className="mobile-warning" role="note">
+        This page is designed for larger screens. Proceed with limited features.
+      </div>
       <main className="dashboard-grid" aria-label="Five panel dashboard">
         <MapPanel />
         <VideoPanel />
@@ -54,6 +57,7 @@ export function DashboardShell() {
         <MarketsPanel />
         <ChatPanel />
       </main>
+      <footer className="mobile-footer">Situation Tracker</footer>
       <PolymarketFooterTicker />
     </div>
   );

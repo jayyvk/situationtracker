@@ -292,6 +292,11 @@ p {
   background: var(--panel);
 }
 
+.mobile-warning,
+.mobile-footer {
+  display: none;
+}
+
 .footer-ticker__frame {
   display: block;
   width: 100%;
@@ -1481,13 +1486,113 @@ html[data-theme="light"] .channel-modal__panel {
     overflow: auto;
   }
 
+  .app-shell {
+    grid-template-rows: auto auto auto auto;
+    min-height: 100vh;
+  }
+
+  .top-bar {
+    grid-template-columns: 1fr;
+    justify-items: start;
+    gap: 0;
+    height: 2.35rem;
+    padding: 0 0.8rem;
+  }
+
+  .top-bar__center,
+  .top-bar__controls {
+    display: none;
+  }
+
+  .top-bar__summary {
+    font-size: 0.78rem;
+  }
+
+  .mobile-warning {
+    display: block;
+    padding: 0.65rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--panel-alt);
+    color: var(--muted);
+    font-size: 0.58rem;
+    line-height: 1.45;
+  }
+
   .dashboard-grid {
     grid-template-columns: 1fr;
     height: auto;
+    gap: 0;
+  }
+
+  .panel--map,
+  .panel--chat {
+    display: none;
+  }
+
+  .panel--video,
+  .panel--feed,
+  .panel--markets {
+    min-height: auto;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .panel--video {
+    grid-row: auto;
   }
 
   .panel--feed {
     grid-column: auto;
+    grid-row: auto;
+  }
+
+  .panel--markets {
+    grid-row: auto;
+  }
+
+  .panel--video .panel__body,
+  .panel--markets .panel__body {
+    min-height: auto;
+  }
+
+  .panel--video {
+    height: auto;
+  }
+
+  .panel--video .panel-stack--video {
+    padding: 0.75rem;
+  }
+
+  .channel-grid {
+    gap: 0.35rem;
+  }
+
+  .channel-pill {
+    min-height: 2rem;
+    padding-inline: 0.75rem;
+  }
+
+  .media-frame {
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+
+  .panel--feed .panel__body {
+    height: 22rem;
+    min-height: 22rem;
+  }
+
+  .terminal-feed {
+    height: 100%;
+    overflow: auto;
+  }
+
+  .panel--markets .panel__body {
+    min-height: 22rem;
+  }
+
+  .panel--markets .tradingview-widget-container--heatmap,
+  .panel--markets .mini-chart-grid {
+    height: 21rem;
   }
 
   .panel__header,
@@ -1511,5 +1616,22 @@ html[data-theme="light"] .channel-modal__panel {
 
   .feed-row__headline {
     font-size: 0.88rem;
+  }
+
+  .footer-ticker {
+    display: none;
+  }
+
+  .mobile-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.1rem;
+    border-top: 1px solid var(--border);
+    background: var(--panel);
+    color: var(--muted);
+    font-size: 0.56rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
   }
 }
