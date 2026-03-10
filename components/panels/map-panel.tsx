@@ -2,9 +2,8 @@
 
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import { useNewsData } from "@/components/dashboard/news-data-context";
 import { PanelShell } from "@/components/panels/panel-shell";
-import { usePollingResource } from "@/components/panels/use-polling-resource";
-import type { NewsResponse } from "@/lib/types/signals";
 
 const LIVE_TOGGLES = [
   { key: "hotspots", label: "Hotspots", defaultOn: true },
@@ -31,7 +30,7 @@ const DynamicMap = dynamic(
 );
 
 export function MapPanel() {
-  const resource = usePollingResource<NewsResponse>("/api/signals/news?region=me&limit=100", 60_000);
+  const resource = useNewsData();
   const [filterOpen, setFilterOpen] = useState(false);
   const [toggles, setToggles] = useState<ToggleState>(defaultToggleState);
   const flightMode = toggles.flights;
@@ -103,7 +102,7 @@ export function MapPanel() {
         </div>
       }
     >
-      {resource.error && !resource.data ? <div className="panel-state">{resource.error}</div> : null}
+      {resource.error && resource.items.length === 0 ? <div className="panel-state">{resource.error}</div> : null}
       {flightMode ? (
         <div className="map-iframe-shell">
           <div className="map-iframe-shell__fallback">
@@ -121,13 +120,13 @@ export function MapPanel() {
             </div>
           </div>
         </div>
-      ) : resource.data ? (
+      ) : resource.items.length > 0 ? (
         <DynamicMap
-          headlines={resource.data.items}
+          headlines={resource.items}
           toggles={toggles}
         />
       ) : null}
-      {!resource.data && resource.loading ? <div className="panel-state">Initializing map feeds...</div> : null}
+      {resource.items.length === 0 && resource.loading ? <div className="panel-state">Initializing map feeds...</div> : null}
     </PanelShell>
   );
 }

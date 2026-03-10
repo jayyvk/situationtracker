@@ -2,27 +2,23 @@
 
 import clsx from "clsx";
 import { useEffect, useMemo, useState } from "react";
+import { useNewsData } from "@/components/dashboard/news-data-context";
 import { PanelShell } from "@/components/panels/panel-shell";
-import { usePollingResource } from "@/components/panels/use-polling-resource";
-import type { HeadlineItem, NewsResponse, Severity } from "@/lib/types/signals";
+import type { HeadlineItem, Severity } from "@/lib/types/signals";
 
 const MAX_ITEMS = 100;
-const NEWS_REFRESH_MS = 2_000;
 const timezoneEventName = "sitrep-timezone-change";
 
 export function NewsFeedPanel() {
-  const resource = usePollingResource<NewsResponse>(
-    "/api/signals/news?region=me&limit=50",
-    NEWS_REFRESH_MS
-  );
+  const resource = useNewsData();
   const [feedItems, setFeedItems] = useState<HeadlineItem[]>([]);
   const [activeZone, setActiveZone] = useState("UTC");
   const [activeSeverity, setActiveSeverity] = useState<Severity | null>(null);
 
   useEffect(() => {
-    const incomingItems = resource.data?.items;
+    const incomingItems = resource.items;
 
-    if (!incomingItems) {
+    if (incomingItems.length === 0) {
       return;
     }
 
@@ -33,7 +29,7 @@ export function NewsFeedPanel() {
       });
       return deduped.slice(0, MAX_ITEMS);
     });
-  }, [resource.data]);
+  }, [resource.items]);
 
   useEffect(() => {
     setActiveZone(Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC");
@@ -59,7 +55,7 @@ export function NewsFeedPanel() {
       return false;
     }
 
-    return Date.now() - resource.lastSuccessAt > 10_000;
+    return Date.now() - resource.lastSuccessAt > 2 * 60_000;
   }, [resource.lastSuccessAt]);
 
   const visibleItems = useMemo(() => {

@@ -31,7 +31,7 @@ export function usePollingResource<T>(url: string, intervalMs: number) {
           requestUrl.searchParams.set("refresh", String(refreshCounter.current));
         }
 
-        const response = await fetch(requestUrl.toString(), { cache: "no-store" });
+        const response = await fetch(requestUrl.toString());
 
         if (!response.ok) {
           throw new Error(`Request failed with ${response.status}`);
@@ -65,13 +65,18 @@ export function usePollingResource<T>(url: string, intervalMs: number) {
     }
 
     void load();
-    const timer = window.setInterval(() => {
-      void load();
-    }, intervalMs);
+    const timer =
+      intervalMs > 0
+        ? window.setInterval(() => {
+            void load();
+          }, intervalMs)
+        : null;
 
     return () => {
       mounted = false;
-      window.clearInterval(timer);
+      if (timer !== null) {
+        window.clearInterval(timer);
+      }
     };
   }, [intervalMs, url]);
 
